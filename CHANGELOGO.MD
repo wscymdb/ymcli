@@ -6,3 +6,4 @@
 
 - 新增 README 文档
 - 新增 CHAGNELOGO 文档
+- 新增 npmignore 文件
