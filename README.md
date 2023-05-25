@@ -30,9 +30,38 @@
   eg: ymcli addcpn NavBar --dest ./src/views/home
 ```
 
--创建 VUE3+TS 的组件
+- 创建 VUE3+TS 的组件
 
 ```shell
 ymcli addcpn cpnname  type --dest ./src/views/home
 eg: ymcli addcpn NavBar  v3t --dest ./src/views/home
+```
+
+# 自动生成一个 route 文件
+
+## 介绍
+
+该命令会自动生成一个 route 文件，并且会生成该 route 对应的 vue 文件
+
+## 使用场景
+
+- 当我们需要动态的注册路由的时候，可以用到该命令
+- router.js 文件是路由的其中一个配置；
+- 可以使用 glob 语法来读取 router 下的所有文件，这样就不用手动的导入 route 路径
+
+## 使用方法
+
+- 创建 VUE3 组件
+
+```shell
+  #  NavBar 是组件名称
+  ymcli addroutefile routefilename --dest url
+  eg: ymcli addroutefile demo --dest ./src/router/demo
+```
+
+- 创建 VUE3+TS 的组件
+
+```shell
+  ymcli addroutefile routefilename type --dest url
+  eg: ymcli addroutefile demo  v3t --dest ./src/router/demo
 ```
