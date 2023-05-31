@@ -65,3 +65,16 @@ eg: ymcli addcpn NavBar  v3t --dest ./src/views/home
   ymcli addroutefile routefilename type --dest url
   eg: ymcli addroutefile demo  v3t --dest ./src/router/demo
 ```
+
+# 自动生成一个 dialog 组件
+
+## 介绍
+
+创建一个基于 ElementUI 的 Vue2 Dialog 组件
+
+## 使用方法
+
+```shell
+ymcli adddialog name --dest url
+eg: ymcli adddialog ymDialog --dest ./src/views/home
+```
