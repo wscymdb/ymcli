@@ -37,6 +37,14 @@ ymcli addcpn cpnname  type --dest ./src/views/home
 eg: ymcli addcpn NavBar  v3t --dest ./src/views/home
 ```
 
+## type 有哪些
+
+| 类型 | 解释                         |
+| ---- | ---------------------------- |
+| v3   | 默认值，创建一个 vue3 的模版 |
+| v2   | 创建一个 vu2 的模版          |
+| v3t  | 创建一个 vue3+ts 的模版      |
+
 # 自动生成一个 route 文件
 
 ## 介绍
