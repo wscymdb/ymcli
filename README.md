@@ -190,3 +190,41 @@ ymcli addroutecpns filepath type
 # filepath：文件地址  type：类型见上面的type表格
 eg: ymcli adddialog ./index.ts v3t
 ```
+
+## 生成路由文件示例
+
+```javascript
+// 这里的path不能写完整的路径，就写vue创建路由对象的path即可
+// 这是为了方便我们在生成动态路由的时候和这个相匹配
+// 以下的属性都是必要的，即使多加属性内部也会忽略
+// 会自动使用src/views 和src/router来拼接path
+module.exports = [
+  {
+    path: '/login', // 生成文件路径
+    name: 'login', // 文件名称
+    createfile: true, // 是否生成文件
+  },
+  {
+    path: '/main',
+    name: 'main',
+    createfile: true,
+  },
+  {
+    path: '/main/analysis',
+    name: 'analysis',
+    createfile: false,
+    children: [
+      {
+        path: '/main/analysis/overview',
+        name: 'overview',
+        createfile: true,
+      },
+      {
+        path: '/main/analysis/dashboard',
+        name: 'dashboard',
+        createfile: true,
+      },
+    ],
+  },
+]
+```
