@@ -2,6 +2,96 @@
 
 一个脚手架，平时用来做一些自动化的操作 或者生成一个通用的项目 后续慢慢添加好用的功能，持续更新中
 
+# 用前必看
+
+设计本脚手架的初衷是为了省去重复且无聊的步骤(其实就是想偷懒 😁)，脚手架中的一些命令是为了配合动态路由而设计的，当然你可以选择直接使用脚手架生成一个项目，这个项目已经包含了动态路由相关的；如果你是想抱着练习的态度你完全可以使用这些命令，这样会让你加深对动态路由的认识，本套 cms 的设计思想如下(这里提一嘴，每个人的思想和架构是不同的，我们没必要去抵触，选取有用的学习就行了，正所谓多条思路不是多个办法吗～)
+
+- 所有文件夹都采用一一对应的设计模式
+
+- `路由`，每个路由对应一个文件夹，该文件夹下对应当前路由的路由对象
+
+  - 说一下为什么要这么设计，因为每个路由都使用的懒加载的方式，后端往数据库中存函数，可能不太友好(当然肯定有别的办法，那么就看后端愿不愿意了，所以我们这里不求人，自己搞定)，那么这样一来，后端就只需要存字符串了，那么久 so easy 啦
+  - 那么怎么将每个路由对象取出呢,看以下代码
+  - ```javascript
+    // 读取router/main下面的所有ts文件，拿到路由对象，放到localRoutes数组里
+    const files: Record<string, any> = import.meta.glob(
+      '../router/main/**/*.ts',
+      {
+        eager: true,
+      }
+    )
+    // 上面会拿到一个数组，然后遍历即可
+    for (const file in files) {
+      const module = files[file]
+      console.log(module.default)
+      localRoutes.push(module.default)
+    }
+    ```
+
+* 下面的文件夹结构就是上面所说的一一对应关系
+  - 这样做的好处是在设计自动化操作的时候会很方便
+  - 因为所谓的自动化操作其实就是找规律，因为这样的文件架构是有规律的，文件都一一对应，所以才可以做自动化操作
+  - 可以看到 router、service(网络请求文件夹)、store、views 之间的关系都是一一对应的
+  - main 文件夹就是嵌套路由的父路由
+
+```shell
+src
+├─ App.vue
+├─ assets
+│    └─ logo.svg
+├─ components
+├─ main.ts
+├─ router
+│    ├─ index.ts
+│    └─ main
+│           ├─ product
+│           │    └─ goods
+│           │           └─ goods.ts
+│           └─ story
+│                  ├─ chat
+│                  │    └─ chat.ts
+│                  └─ list
+│                         └─ list.ts
+├─ service
+│    ├─ index.ts
+│    ├─ main
+│    │    ├─ main.ts
+│    │    ├─ product
+│    │    │    └─ goods
+│    │    │           └─ goods.ts
+│    │    └─ story
+│    │           ├─ chart
+│    │           │    └─ chart.ts
+│    │           └─ list
+│    │                  └─ list.ts
+│    └─ request
+│           ├─ index.ts
+│           └─ types.ts
+├─ store
+│    ├─ index.ts
+│    └─ main
+│           ├─ main.ts
+│           ├─ product
+│           │    └─ goods
+│           │           └─ goods.ts
+│           └─ story
+│                  ├─ chart
+│                  │    └─ chart.ts
+│                  └─ list
+│                         └─ list.ts
+└─ views
+       └─ main
+              ├─ main.ts
+              ├─ product
+              │    └─ goods
+              │           └─ goods.ts
+              └─ story
+                     ├─ chart
+                     │    └─ chart.ts
+                     └─ list
+                            └─ list.ts
+```
+
 # 自动生成 vue component
 
 ## 使用场景
@@ -85,4 +175,18 @@ eg: ymcli addcpn NavBar  v3t --dest ./src/views/home
 ```shell
 ymcli adddialog name --dest url
 eg: ymcli adddialog ymDialog --dest ./src/views/home
+```
+
+# 根据文件生成对应的 route 对象和该 route 对应的 vue 组件
+
+## 介绍
+
+会根据 js/ts 文件生成对应的 route 对象和该 route 对应的 vue 组件,`注意导出的时候要使用commonjs的导出方式`
+
+## 使用方法
+
+```shell
+ymcli addroutecpns filepath type
+# filepath：文件地址  type：类型见上面的type表格
+eg: ymcli adddialog ./index.ts v3t
 ```
