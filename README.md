@@ -194,37 +194,21 @@ eg: ymcli adddialog ./index.ts v3t
 ## 生成路由文件示例
 
 ```javascript
-// 这里的path不能写完整的路径，就写vue创建路由对象的path即可
-// 这是为了方便我们在生成动态路由的时候和这个相匹配
-// 以下的属性都是必要的，即使多加属性内部也会忽略
-// 会自动使用src/views 和src/router来拼接path
+// name 和 dest 是必要的
+// title是非必要的，title的作用是让自己可以知道模块叫啥方便自己阅读
 module.exports = [
   {
-    path: '/login', // 生成文件路径
-    name: 'login', // 文件名称
-    createfile: true, // 是否生成文件
+    name: 'login', // 生成的文件名称
+    dest: 'src/views/login', // 生成到拿个文件夹
   },
   {
-    path: '/main',
     name: 'main',
-    createfile: true,
+    dest: 'src/views/main',
   },
   {
-    path: '/main/analysis',
-    name: 'analysis',
-    createfile: false,
-    children: [
-      {
-        path: '/main/analysis/overview',
-        name: 'overview',
-        createfile: true,
-      },
-      {
-        path: '/main/analysis/dashboard',
-        name: 'dashboard',
-        createfile: true,
-      },
-    ],
+    title: '模型锤炼',
+    name: 'modelTemperingInfo',
+    dest: 'src/views/main/modelManager/modelTemperingInfo',
   },
 ]
 ```
