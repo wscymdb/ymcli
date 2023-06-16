@@ -92,6 +92,20 @@ src
                             └─ list.ts
 ```
 
+# 生成一个 vue 通用后台项目
+
+## 介绍
+
+会生成一个 vue 通用后台项目
+
+## 使用方法
+
+```shell
+ymcli create project
+# project 项目名称
+eg: ymcli create demo
+```
+
 # 自动生成 vue component
 
 ## 使用场景
@@ -149,19 +163,13 @@ eg: ymcli addcpn NavBar  v3t --dest ./src/views/home
 
 ## 使用方法
 
-- 创建 VUE3 组件
-
 ```shell
   #  NavBar 是组件名称
-  ymcli addroutefile routefilename --dest url
-  eg: ymcli addroutefile demo --dest ./src/router/demo
-```
-
-- 创建 VUE3+TS 的组件
-
-```shell
+  # type: 如果是js 会创建js路由文件 同时创建vue3的模版
+  # type: 如果是ts 会创建ts路由文件 同时创建vue3+ts的模版
+  # type 默认是js
   ymcli addroutefile routefilename type --dest url
-  eg: ymcli addroutefile demo  v3t --dest ./src/router/demo
+  eg: ymcli addroutefile demo --dest ./src/router/demo
 ```
 
 # 自动生成一个 dialog 组件
@@ -187,8 +195,8 @@ eg: ymcli adddialog ymDialog --dest ./src/views/home
 
 ```shell
 ymcli addroutecpns filepath type
-# filepath：文件地址  type：类型见上面的type表格
-eg: ymcli adddialog ./index.ts v3t
+# filepath：文件地址  type：ts || js 默认type js
+eg: ymcli adddialog ./index.ts ts
 ```
 
 ## 生成路由文件示例
